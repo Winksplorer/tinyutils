@@ -13,9 +13,8 @@ syscall
 
 ; entry point
 _start:
-    ; Check for -v argument (version)
+    ; Check if there is 1 argument passed
     mov rsi, [rsp]                                   ; argc
-    mov rdi, [rsp+8]                                 ; argv
     cmp rsi, 2                                       ; check if there is an argv[1]
     je argv1_exists                                  ; if there is, then jump to argv1_exists. if not, program flow will continue.
 
