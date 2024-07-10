@@ -1,5 +1,5 @@
 # Define the utilities
-UTILS = tinyshutdown
+UTILS = tinyshutdown tinyyes
 
 # Define directories
 OBJ_DIR = obj
@@ -19,13 +19,16 @@ all: $(UTILS)
 # Pattern rule to build each utility
 $(UTILS): %: $(OBJ_DIR)/%.o
 	@mkdir -p $(BIN_DIR)
-	$(LD) $< $(LDFLAGS) -o $(BIN_DIR)/$@
-	$(STRIP) $(STRIPFLAGS) $(BIN_DIR)/$@
+	@echo "   LD $<"
+	@$(LD) $< $(LDFLAGS) -o $(BIN_DIR)/$@
+	@echo "STRIP $@"
+	@$(STRIP) $(STRIPFLAGS) $(BIN_DIR)/$@
 
 # Pattern rule to build object files
 $(OBJ_DIR)/%.o: %.asm
 	@mkdir -p $(OBJ_DIR)
-	$(NASM) $< -o $@ $(NASMFLAGS)
+	@echo " NASM $<"
+	@$(NASM) $< -o $@ $(NASMFLAGS)
 
 # Clean target
 clean:
